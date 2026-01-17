@@ -15,15 +15,24 @@ logger = logging.getLogger(__name__)
 def extract_title_from_content(content: str) -> tuple[str, str]:
     title = ""
     remaining_lines = []
+    found_content = False
 
     if not content.strip():
         return title, ""
 
     for line in content.splitlines():
+
+        is_whitespace = not line.strip()
+
+        if not found_content:
+            if is_whitespace:
+                continue
+
+        found_content = True
         if line.startswith("# ") and not title:
             title = line[2:].strip()
+            continue
 
-    else:
         remaining_lines.append(line)
 
     return title, "\n".join(remaining_lines).strip()

@@ -1,9 +1,9 @@
 import logging
 
-from mypy_diary.core.handler import EntryHandler
+from mypy_diary.core.entry import EntryHandler
 from mypy_diary.cli.args import parse_args
-from mypy_diary.core.logger import setup_logging
-from mypy_diary.core.config import Config
+from mypy_diary.etc.logger import setup_logging
+from mypy_diary.etc.config import Config
 
 logger = logging.getLogger(__name__)
 
