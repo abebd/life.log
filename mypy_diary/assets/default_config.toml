@@ -2,6 +2,7 @@
 editor="vim"
 verbose=false
 storage_mode="file"
+extension="entry"
 
 [paths]
 diary_db="~/.local/share/mypy-diary/diary.db"

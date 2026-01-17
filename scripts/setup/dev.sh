@@ -1,7 +1,2 @@
-rm -r .venv
-
-python3 -m venv .venv
-
-source .venv/bin/active
-
-pip install -e .
+#TODO add cd to project root...
+uv pip install -e .
