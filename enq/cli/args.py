@@ -1,10 +1,8 @@
 import argparse
-import sys
 import os
 
 from dataclasses import dataclass
 from importlib.metadata import version as get_version
-
 
 @dataclass(frozen=True)
 class CliArgs:
@@ -15,6 +13,7 @@ class CliArgs:
     read_entry: str
     new: bool
     config_file: str
+    no_menu: bool
 
 
 def parse_args() -> CliArgs:
@@ -72,12 +71,17 @@ def parse_args() -> CliArgs:
         "-n", "--new", action="store_true", help="Open an editor and write an entry."
     )
 
+    parser.add_argument(
+        "--no-menu", action="store_true", help="Don't launch the menu. Go full CLI mode."
+    )
+
     args = parser.parse_args()
 
-    # Verify args
-    if len(sys.argv) == 1:
-        parser.print_help()
-        sys.exit(1)
+    # Print out args if none were provided
+    # NOTE: no longer used since we have the MenuHandler
+    #if len(sys.argv) == 1:
+    #    parser.print_help()
+    #    sys.exit(1)
 
     if args.title and not args.message:
         parser.error("--title requires --message")

@@ -3,6 +3,8 @@ import subprocess
 
 from pathlib import Path
 
+from enq.cli.interface import ui, State
+
 
 class Editor:
     def __init__(self, editor_name):
@@ -15,6 +17,8 @@ class Editor:
 
     def open(self, file_path: Path):
         try:
+            ui.state = State.IN_EDITOR
             subprocess.run([self.editor, str(file_path)], check=True)
+            ui.reset_state()
         except subprocess.CalledProcessError as e:
-            print(f"Editor exited with an error: {e}")
+            wrint(f"Editor exited with an error: {e}")

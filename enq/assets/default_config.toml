@@ -2,7 +2,7 @@
 editor="vim"
 verbose=false
 storage_mode="file"
-extension="entry"
+extension="md"
 
 [paths]
 diary_db="~/.local/share/enq/diary.db"
