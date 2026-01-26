@@ -15,10 +15,7 @@ IS_DEBUG = os.getenv("DEBUG") == "1"
 
 class Config:
     def __init__(self, user_provided_path: str):
-        dev_path = Path(__file__).parent.parent / DEFAULT_CONFIG_NAME
-        proper_path = Path(user_config_dir("lifelog")) / DEFAULT_CONFIG_NAME
-
-        default_path = dev_path if IS_DEBUG else proper_path
+        default_path = Path(user_config_dir("lifelog")) / DEFAULT_CONFIG_NAME
 
         self.config_file = self._resolve_config_path(user_provided_path, default_path)
 
@@ -26,6 +23,7 @@ class Config:
         self.data = self._load_config()
         self.settings = self.data["settings"]
         self.paths = self.data["paths"]
+        self.storage = self.data["storage"]
 
     def _resolve_config_path(self, user_provided_path: str, default_path: Path):
         if user_provided_path:
@@ -41,8 +39,8 @@ class Config:
                 )
 
         if not default_path.exists():
-            logger.debug(f"Could not find config file {str(self.config_file)}")
-            self._create_default_config()
+            logger.debug(f"Could not find default config file, creating it")
+            self._create_default_config(default_path)
 
         return default_path
 
@@ -52,9 +50,10 @@ class Config:
         with open(self.config_file, "rb") as f:
             return tomllib.load(f)
 
-    def _create_default_config(self):
+    def _create_default_config(self, default_path):
         template = resources.files("lifelog.assets").joinpath(CONFIG_TEMPLATE_NAME)
 
-        self.config_file.write_bytes(template.read_bytes())
+        default_path.parent.mkdir(parents=True, exist_ok=True)
+        default_path.write_bytes(template.read_bytes())
 
-        logger.debug(f"Created default config at {self.config_file}")
+        logger.debug(f"Created default config at {default_path}")

@@ -1,9 +1,12 @@
 [settings]
 editor="vim"
 verbose=false
-storage_mode="file"
-extension="md"
+storage_mode="database"
 
 [paths]
 diary_db="~/.local/share/lifelog/diary.db"
 diary_folder="~/.local/share/lifelog/diary"
+
+[storage]
+db_engine="sqlite3"
+file_extension="md"

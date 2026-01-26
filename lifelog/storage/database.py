@@ -46,6 +46,7 @@ class DatabaseStorage(Storage):
     def _setup_database(self):
         if not os.path.exists(self.db_path):
             logger.debug(f"Unable to find database {self.db_path}, creating it.")
+            self.db_path.parent.mkdir(parents=True, exist_ok=True)
 
         self.connection = sqlite3.connect(self.db_path)
 

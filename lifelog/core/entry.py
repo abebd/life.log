@@ -37,7 +37,7 @@ class EntryHandler:
         editor = Editor(self.config.settings["editor"])
 
         with tempfile.NamedTemporaryFile(
-            mode="w+", suffix=self.config.settings["extension"], delete=False
+            mode="w+", suffix=self.config.storage["file_extension"], delete=False
         ) as tf:
             temp_path = Path(tf.name)
 

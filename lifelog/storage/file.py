@@ -2,8 +2,12 @@ from lifelog.storage.base import Storage
 
 
 class FileStorage(Storage):
-    def __init__():
+    def __init__(self, config):
         pass
+
+    @property
+    def type(self):
+        return "file"
 
     def add_entry(self, body, timestamp):
         pass
