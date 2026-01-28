@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lifelog"
-version = "0.0.1"
+version = "0.1.0a1"
 requires-python = ">3.13.0"
 dependencies = [
     "platformdirs>=4.5.1",
@@ -22,3 +22,6 @@ lifelog = "lifelog.main:main"
 dev = [
     "ruff>=0.14.13",
 ]
+
+[tool.hatch.build]
+artifacts = ["*.sql"]
